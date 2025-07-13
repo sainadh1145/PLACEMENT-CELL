@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIT Hyderabad - Placements & Training</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary: #1a3a6c;
+            --secondary: #e63946;
+            --accent: #2a9d8f;
+            --light: #f1faee;
+            --dark: #1d3557;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--primary);
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .navbar ul li {
+            margin: 5px 15px;
+        }
+        
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            display: block;
+        }
+        
+        .navbar ul li a:hover,
+        .navbar ul li a.active {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Page Sections */
+        .content-wrapper {
+            margin-top: 70px;
+        }
+        
+        .page-section {
+            min-height: 100vh;
+            padding: 20px 5% 50px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        
+        .page-section.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Common Styling for All Sections */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .section-header p {
+            color: #555;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Card Grid System */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .card.animate-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            padding: 1.2rem;
+        }
+        
+        .card-header h4 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body ul {
+            padding-left: 20px;
+            margin: 1rem 0;
+        }
+        
+        .card-body li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        table.animate-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        th, td {
+            padding: 1.1rem 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f7ff;
+        }
+        
+        .photo-placeholder {
+            width: 80px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        /* Certification Boxes */
+        .certification-boxes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        /* Partner Grid for Industry Certifications */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 1.5rem;
+        }
+        
+        .certification-box {
+            background-color: white;
+            border: 2px solid var(--accent);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+        
+        .certification-box.animate-in {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .certification-box h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Commitment Grid */
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .commitment-item {
+            background-color: #e6f7ff;
+            border: 1px solid #cceeff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .commitment-item.animate-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .commitment-item h4 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        
+        .commitment-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .commitment-item li {
+            margin-bottom: 10px;
+            color: #333;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .commitment-item li:before {
+            content: "•";
+            color: var(--accent);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .contact-info.animate-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+        
+        .contact-detail {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-detail i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            min-width: 30px;
+            padding-top: 4px;
+        }
+        
+        .contact-detail div {
+            flex: 1;
+        }
+        
+        .contact-detail strong {
+            color: var(--dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .map-container {
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-placeholder {
+            background: linear-gradient(to bottom, #e6f7ff, #b3e0ff);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .navbar ul li {
+                margin: 5px;
+            }
+            
+            .navbar ul li a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .commitment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .certification-boxes-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .certification-box {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .contact-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#placement-overview" class="active">Overview</a></li>
+            <li><a href="#tnp-policy">T&P Policy</a></li>
+            <li><a href="#placement-committee">Committee</a></li>
+            <li><a href="#internships">Internships</a></li>
+            <li><a href="#industry-certifications">Certifications</a></li>
+            <li><a href="#training-activities">Training</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        <!-- Placement Overview Page -->
+        <section id="placement-overview" class="page-section active">
+            <div class="section-header">
+                <h1>Placement Overview</h1>
+                <p>At Symbiosis Institute of Technology, Hyderabad, the Training and Placement (T&P) Cell serves as the cornerstone for enabling students to transition successfully from academia to industry. Guided by the values of excellence, innovation, and holistic development, the Cell strives to empower students to become future-ready professionals equipped with technical expertise, professional confidence, and industry-aligned competencies.</p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-rocket"></i> Our Mission</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>To empower students into becoming industry-ready professionals through a dynamic, inclusive, and future-forward talent transformation ecosystem, aligned with the ethos of excellence, innovation, and holistic development at Symbiosis Institute of Technology, Hyderabad.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-bullseye"></i> Key Objectives</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Organize campus recruitment drives with reputed companies</li>
+                            <li>Prepare students through aptitude and coding assessments</li>
+                            <li>Enhance personality development and communication skills</li>
+                            <li>Provide career counselling with industry professionals</li>
+                            <li>Build industry engagement through seminars and collaborations</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-chart-line"></i> Placement Goals</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Nurture agile talent through structured training programs</li>
+                            <li>Facilitate meaningful career pathways for students</li>
+                            <li>Bridge the academia-industry gap with real-world exposure</li>
+                            <li>Ensure 100% placement for eligible students</li>
+                            <li>Increase Dream Offers (10+ LPA) by 30% annually</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- T&P Policy Page -->
+        <section id="tnp-policy" class="page-section">
+            <div class="section-header">
+                <h1>Training and Placement Cell Policy</h1>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-file-alt"></i> Placement Policy Highlights</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>A student may apply to any number of IT/Core companies</li>
+                            <li>After two job offers, students exit the placement process</li>
+                            <li>Dream Offer (10+ LPA) eligibility: one per student</li>
+                            <li>Minimum 60% academic score required throughout</li>
+                            <li>All communication through T&P Cell</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-user-check"></i> Eligibility Criteria</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Minimum 60% across all educational stages</li>
+                            <li>Regular attendance and discipline required</li>
+                            <li>No active backlogs at time of placement</li>
+                            <li>Positive recommendation from faculty mentor</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-briefcase"></i> Job Offer Policy</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Maximum two regular offers per student</li>
+                            <li>One Dream Offer allowed, doesn't count toward regular offers</li>
+                            <li>In Day 1 scenarios, only one final offer can be accepted</li>
+                            <li>Formal acceptance required within 48 hours</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h2>Key Initiatives and Services</h2>
+            </div>
+            
+            <div class="commitment-grid">
+                <div class="commitment-item">
+                    <h4>Career Guidance</h4>
+                    <ul>
+                        <li>Skills & Competency Profiling</li>
+                        <li>Opportunity Awareness (Local & Global)</li>
+                        <li>Personalized Mentorship Sessions</li>
+                        <li>Goal-Driven Career Mapping</li>
+                    </ul>
+                </div>
+                
+                <div class="commitment-item">
+                    <h4>Industry Readiness</h4>
+                    <ul>
+                        <li>Technical Mastery Workshops</li>
+                        <li>Workplace English & Business Writing</li>
+                        <li>Sector-Focused Knowledge Sharing</li>
+                        <li>Innovation Hubs & Startup Cells</li>
+                    </ul>
+                </div>
+                
+                <div class="commitment-item">
+                    <h4>Corporate Engagement</h4>
+                    <ul>
+                        <li>Industry Exposure Visits</li>
+                        <li>Leadership Guest Lectures</li>
+                        <li>Professional Development Events</li>
+                        <li>Academic-Industry Collaborations</li>
+                    </ul>
+                </div>
+                
+                <div class="commitment-item">
+                    <h4>Operational Support</h4>
+                    <ul>
+                        <li>Corporate Liaison & Follow-Ups</li>
+                        <li>Student Data Management</li>
+                        <li>Departmental Coordination</li>
+                        <li>Infrastructure Oversight</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placement Committee Page -->
+        <section id="placement-committee" class="page-section">
+            <div class="section-header">
+                <h1>Placement Committee</h1>
+                <p>Our dedicated placement team works to connect students with industry opportunities and ensure successful career transitions.</p>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Photo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Dr. Rajanikanth Aluvalu</td>
+                        <td>Director</td>
+                        <td>director@sithyd.siu.edu.in</td>
+                        <td>+91 99789 67155</td>
+                        <td>
+                            <div class="photo-placeholder">
+                                Add Photo Here
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Mr. Sai Prashanth</td>
+                        <td>Training & Placement Incharge</td>
+                        <td>saiprashanth@sithyd.siu.edu.in</td>
+                        <td>+91-7093319953</td>
+                        <td>
+                            <div class="photo-placeholder">
+                                Add Photo Here
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Mr. Pallati Narsimhulu</td>
+                        <td>Faculty Coordinator</td>
+                        <td>pallatinarsimhulu@sithyd.siu.edu.in</td>
+                        <td>+91 98667 77555</td>
+                        <td>
+                            <div class="photo-placeholder">
+                                Add Photo Here
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Ms. UmaRani Tejomurtula</td>
+                        <td>Developer Productivity Specialist – Microsoft</td>
+                        <td>umarani.tejomurtula@microsoft.com</td>
+                        <td>+91 98668 57585</td>
+                        <td>
+                            <div class="photo-placeholder">
+                                Add Photo Here
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Ms. Niharika Vanka</td>
+                        <td>Senior Data Analyst, UK</td>
+                        <td>vankaniharika08@gmail.com</td>
+                        <td>+917993394371</td>
+                        <td>
+                            <div class="photo-placeholder">
+                                Add Photo Here
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Internships Page -->
+        <section id="internships" class="page-section">
+            <div class="section-header">
+                <h1>Internships</h1>
+                <p>Structured internship opportunities designed to complement academic learning with real-world experience while maintaining institutional discipline.</p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-crosshairs"></i> Purpose & Scope</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Purpose:</strong> Guide students in pursuing internships that complement academic and professional development.</p>
+                        <p><strong>Scope:</strong> Applies to all undergraduate students across all departments.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-bullseye"></i> Objectives</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Encourage industrial internships and research projects</li>
+                            <li>Ensure alignment with academic goals</li>
+                            <li>Provide attendance approval framework</li>
+                            <li>Maintain institutional discipline</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-user-check"></i> Eligibility</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Completed second semester of study</li>
+                            <li>Minimum CGPA of 6.0</li>
+                            <li>No backlogs at time of application</li>
+                            <li>Faculty mentor endorsement</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-calendar-alt"></i> Duration & Timelines</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Summer break (May–July)</li>
+                            <li>Winter break (December–January)</li>
+                            <li>During academic semesters (exceptional cases only)</li>
+                            <li>Requires justified documentation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-file-alt"></i> Application Process</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Submit application form with offer letter</li>
+                            <li>Attach Statement of Purpose (SOP)</li>
+                            <li>Endorsement by faculty mentor</li>
+                            <li>Approval by Placement Cell</li>
+                            <li>Final submission to Director</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-clipboard-check"></i> Requirements</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Attendance exemption requires prior approval</li>
+                            <li>Students must cover missed academic work</li>
+                            <li>No leniency for academic performance</li>
+                            <li>Submit Completion Report and Certificate</li>
+                            <li>Participate in evaluation viva/presentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industry Certifications Page -->
+        <section id="industry-certifications" class="page-section">
+            <div class="section-header">
+                <h1>Industry-Linked Certifications</h1>
+                <p>SIT Hyderabad partners with leading technology companies to provide students with industry-recognized certifications that enhance their employability and technical expertise.</p>
+            </div>
+            
+            <div class="partner-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fab fa-microsoft"></i> Microsoft</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Microsoft certification programs in cloud computing, AI, and software development.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fab fa-google"></i> Google</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Google certification programs in IT support, data analytics, and project management.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-robot"></i> Google GEN AI</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Cutting-edge generative AI certification for next-generation technology professionals.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-laptop-code"></i> Infosys Springboard</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Industry-aligned certification programs in emerging technologies and business skills.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-database"></i> MongoDB</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Database certification programs for modern application development.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fab fa-aws"></i> AWS Academy</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Cloud computing certification programs for in-demand AWS skills.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h2>Featured Certification Programs</h2>
+            </div>
+            
+            <div class="certification-boxes-container">
+                <div class="certification-box">
+                    <h3>Infosys Spring Board Certifications</h3>
+                    <p>Industry-aligned programs in emerging technologies and business skills</p>
+                </div>
+                
+                <div class="certification-box">
+                    <h3>Google Gen AI Exchange Program</h3>
+                    <p>Cutting-edge generative AI certification for technology professionals</p>
+                </div>
+                
+                <div class="certification-box">
+                    <h3>Microsoft AI SkillSprint Program</h3>
+                    <p>Comprehensive AI certification opportunity for students</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Activities Page -->
+        <section id="training-activities" class="page-section">
+            <div class="section-header">
+                <h1>Training Activities</h1>
+                <p>At SIT Hyderabad, we offer various training activities to enhance placement opportunities for our students through comprehensive skill development programs.</p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-code"></i> Technical & Programming Skills</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Technical Workshops on emerging technologies</li>
+                            <li>Industry Interaction Sessions with professionals</li>
+                            <li>Technical Competitions and Hackathons</li>
+                            <li>Industry-Oriented Value-Added Courses</li>
+                            <li>Peer-to-Peer Learning programs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-brain"></i> Aptitude Skills</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Aptitude Test Preparation programs</li>
+                            <li>Quantitative aptitude training</li>
+                            <li>Logical reasoning development</li>
+                            <li>Verbal ability enhancement</li>
+                            <li>Regular assessment using CODE TANTRA & HackerRank</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-comments"></i> Soft Skills Development</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Communication and interpersonal skills</li>
+                            <li>Mock interview sessions with feedback</li>
+                            <li>Group discussion practice</li>
+                            <li>Professional resume building workshops</li>
+                            <li>Individualized career counselling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-header">
+                <h2>Training Assessment Platforms</h2>
+            </div>
+            
+            <div class="commitment-grid">
+                <div class="commitment-item">
+                    <h4>CODE TANTRA</h4>
+                    <ul>
+                        <li>Automated coding assessment platform</li>
+                        <li>Continuous performance tracking</li>
+                        <li>Real-time feedback on solutions</li>
+                        <li>Progress reports for students</li>
+                    </ul>
+                </div>
+                
+                <div class="commitment-item">
+                    <h4>HackerRank</h4>
+                    <ul>
+                        <li>Industry-standard coding challenges</li>
+                        <li>Preparation for technical interviews</li>
+                        <li>Skill certification programs</li>
+                        <li>Leaderboards for healthy competition</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page-section">
+            <div class="section-header">
+                <h1>Contact Training & Placement Cell</h1>
+                <p>Get in touch with our Placement Team for any queries or information</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3><i class="fas fa-headset"></i> Placement Contact Information</h3>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-user"></i>
+                    <div>
+                        <strong>Head, Training & Placement Cell:</strong>
+                        <p>Mr. Sai Prashanth Mallellu</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email:</strong>
+                        <p>placements@sithyd.siu.edu.in</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-university"></i>
+                    <div>
+                        <strong>Institute:</strong>
+                        <p>Symbiosis Institute of Technology, Hyderabad</p>
+                        <p>A Constituent of Symbiosis International University (Accredited by NAAC with 'A++' grade)</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Address:</strong>
+                        <p>Survey Number 292, Off Bangalore Highway,</p>
+                        <p>Modallaguda (V), Nandigama (M),</p>
+                        <p>Rangareddy Dist, Hyderabad, Telangana, India</p>
+                        <p>Pin Code: 509217</p>
+                        <div style="margin-top:15px;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.099989112709!2d78.2095339!3d17.1513484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcbc7c7319c3f89%3A0xfcc6567be7a2cb7d!2sSymbiosis%20Institute%20of%20Technology%20(SIT)%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1710156586556!5m2!1sen!2sin"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                width="100%"
+                                height="200"
+                                style="border:0;">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (appears at the end of every page) -->
+    <footer class="site-footer">
+        <div class="footer-red-bar">
+            Copyright © 2024. Symbiosis Institute of Technology,
+        </div>
+        <div class="footer-boxes">
+            <div class="footer-col">
+                <a href="/"> <img src="https://sithyd.siu.edu.in/images/logos/footerimg.webp" alt="SIT Hyderabad Logo" style="max-width:140px;"> </a>
+                <h4 class="footer-para">Symbiosis Institute Of Technology (SIT), Hyderabad</h4>
+            </div>
+            <div class="footer-col">
+                <h5 class="footer-title">About Institute</h5>
+                <ul class="footer-list">
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/Institute">The Institute</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/vision-and-mission">Vision &amp; Mission</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/leadership">Governing Bodies</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/dean-message">Dean's Message</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/the-director">The Director</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/advantage">The Symbiosis Advantage</a></li>
+                    <li><a target="_blank" href="https://siu.edu.in/symbiosis-committee.php">University Authorities/Committees</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/aboutus/gallery">Gallery</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/privacy-policy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5 class="footer-title">Important Links</h5>
+                <ul class="footer-list">
+                    <li><a href="https://sithyd.siu.edu.in/contact-us">Contact Us</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/coming-soon">UGC Rules &amp; Regulations</a></li>
+                    <li><a href="https://sithyd.siu.edu.in/enquire-now">Enquire Now</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5 class="footer-title">Address</h5>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/maps-and-flags.svg" alt="Map Icon">
+                    <span>Survey Number 292, Off Bangalore Highway, Modallaguda (V), Nandigama (M), Rangareddy Dist, Hyderabad, Telangana, India, Pin Code : 509217</span>
+                </div>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/mail.svg" alt="Mail Icon">
+                    <span><a href="mailto:btechadmissions@sithyd.siu.edu.in">btechadmissions@sithyd.siu.edu.in</a></span>
+                </div>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/telephone-call.svg" alt="Phone Icon">
+                    <span><a href="tel:+918374983818">+918374983818</a></span>
+                </div>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/telephone-call.svg" alt="Phone Icon">
+                    <span><a href="tel:+919032548008">+919032548008</a></span>
+                </div>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/telephone-call.svg" alt="Phone Icon">
+                    <span><a href="tel:+917680934525">+917680934525</a></span>
+                </div>
+                <div class="footer-address">
+                    <img src="https://sithyd.siu.edu.in/images/icons/telephone-call.svg" alt="Phone Icon">
+                    <span><a href="tel:+040-27232706, 707, 708, 709">040-27232706, 707, 708, 709</a></span>
+                </div>
+            </div>
+        </div>
+        <a id="top-button" class="arrow up show" style="cursor: pointer;" title="Back to top">
+            <svg fill="#fff" height="35px" width="25px" viewBox="0 0 330 330">
+                <path d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394  l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393  C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"></path>
+            </svg>
+        </a>
+    </footer>
+
+    <style>
+    /* Footer Styles */
+    .site-footer {
+        background: rgba(26, 58, 108, 0.95); /* var(--primary) with transparency */
+        color: #fff;
+        margin-top: 40px;
+        font-size: 1rem;
+        padding-top: 0;
+        box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    }
+    .footer-red-bar {
+        background: var(--secondary);
+        color: #fff;
+        text-align: center;
+        padding: 12px 0 10px 0;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 1.05rem;
+    }
+    .footer-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        padding: 40px 5% 25px 5%;
+        background: rgba(26, 58, 108, 0.85);
+    }
+    .footer-col {
+        flex: 1 1 220px;
+        min-width: 220px;
+        max-width: 320px;
+        margin-bottom: 20px;
+    }
+    .footer-title {
+        color: var(--accent);
+        font-size: 1.15rem;
+        margin-bottom: 15px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .footer-para {
+        color: #fff;
+        font-size: 1.05rem;
+        margin-top: 20px;
+        margin-bottom: 0;
+        font-weight: 500;
+    }
+    .footer-list {
+        list-style: disc inside;
+        padding-left: 0;
+        margin: 0 0 0 10px;
+    }
+    .footer-list li {
+        margin-bottom: 8px;
+    }
+    .footer-list a {
+        color: #f1faee;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .footer-list a:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    .footer-address {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: #f1faee;
+        font-size: 0.98rem;
+    }
+    .footer-address img {
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
+    }
+    .footer-address a {
+        color: #f1faee;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .footer-address a:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+    #top-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 2000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transition: background 0.2s;
+    }
+    #top-button:hover {
+        background: var(--secondary);
+    }
+    /* Responsive Footer */
+    @media (max-width: 900px) {
+        .footer-boxes {
+            flex-direction: column;
+            gap: 0;
+            padding: 30px 4% 20px 4%;
+        }
+        .footer-col {
+            max-width: 100%;
+            margin-bottom: 25px;
+        }
+    }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar a');
+            const pageSections = document.querySelectorAll('.page-section');
+            
+            // Function to show a specific page
+            function showPage(pageId) {
+                // Hide all pages
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Remove active class from all nav links
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Show the requested page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    
+                    // Add active class to the corresponding nav link
+                    document.querySelector(`.navbar a[href="#${pageId}"]`).classList.add('active');
+                    
+                    // Animate elements on the page
+                    setTimeout(() => {
+                        animatePageElements(targetPage);
+                    }, 100);
+                }
+            }
+            
+            // Function to animate elements on a page
+            function animatePageElements(page) {
+                const elements = page.querySelectorAll('.card, table, .commitment-item, .certification-box, .contact-info');
+                elements.forEach((element, index) => {
+                    setTimeout(() => {
+                        element.classList.add('animate-in');
+                    }, 100 + (index * 150));
+                });
+            }
+            
+            // Add click event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    showPage(pageId);
+                    
+                    // Scroll to top of the page
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Show the first page on load
+            showPage('placement-overview');
+            
+            // Animate elements on the initial page
+            animatePageElements(document.querySelector('.page-section.active'));
+        });
+    </script>
+</body>
+</html>
